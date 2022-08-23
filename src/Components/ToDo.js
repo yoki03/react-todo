@@ -8,10 +8,10 @@ function ToDo() {
 
     useEffect(()=>{
         if(localStorage.getItem("localTasks")){
-            //const storedList = JSON.parse(localStorage.getItem("localTasks"));
-            //setTasks(storedList);
+            const storedList = JSON.parse(localStorage.getItem("localTasks"));
+            setTasks(storedList);
             //console.log((localStorage.getItem("localTasks")));
-            this.Services.getTodos().then((res) => setTasks(res));
+            //Services.getTodos().then((res) => setTasks(res));
         }
     },[])
 
