@@ -1,31 +1,22 @@
-import React, {useState} from 'react'
+import React from 'react'
 
 function TodoForm({addTask}) {
-
-    const [task, setTask] = useState('');
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
+      
+      const getValueInput = () =>{
+        const task = document.getElementById("CurrentTask").value; 
         addTask(task);
-        setTask("");
-    }
-
-    const handleChange = e => {
-        setTask(e.target.value);
-    }
+      }
 
   return (
     <div>
-        <form className='input-group mb-3' onSubmit={handleSubmit}>
+        <form className='input-group mb-3' onSubmit={getValueInput}>
                 <input 
                 name='task' 
+                id='CurrentTask'
                 type="text" 
-                value={task}
                 placeholder='write your tasks' 
                 className='col-9'
-                onChange={handleChange}
                 />
-            
                 <button 
                 className='btn btn-primary col-3'
                 >add</button>
