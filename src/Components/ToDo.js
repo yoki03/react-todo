@@ -2,50 +2,51 @@ import React, { useState, useEffect } from "react";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
 import {getTodos, setTodos} from "./Services/services.js";
+import Messages from './Messages';
+
 
 function ToDo() {
     const [tasks, setTasks] = useState(getTodos());
-
+    const [popup, setPopup] = useState({flag: false, val: ''})
+    
     useEffect(()=>{   
         setTodos(tasks);
     },[tasks])
 
+    const closePopup = () => {
+        setTimeout(() => {
+          setPopup({flag: false, val: ''});
+        },2000)
+    }
+
     const addTask = (task) => {
+        task = task.trim();
         if (!task || /^\s*$/.test(task)) {
             return;
+        }else if (tasks.find((t) => t.text === task)){
+            setPopup({flag: true, val: `task ${task} already exist`});
+            closePopup();
+            return;
         }
-
-        let copy = [...tasks];
-        copy = [...copy, { id: new Date().getTime().toString(), text: task}];
-        setTasks(copy);
+        setPopup({flag: true, val: `added the task: ${task}`});
+        closePopup();
+        setTasks([...tasks, { id: new Date().getTime().toString(), text: task}]);
     }
 
-
-    var alerts = document.getElementById('alerts')
-    function closeAlert() {
-        alerts.style.display = 'none';
-    }
-    function showAlert(){
-        let closer;
-        alerts.style.display = 'block';
-        closer = setTimeout(closeAlert, 2000)
-    }
     const handleDelete = (task)=>{
-        let text = (`Are you sure to remove ${task.text}.`);
-        if (window.confirm(text) === true) {
-            let timer;
             const deleted = tasks.filter((t)=>t.id !== task.id);
             setTasks(deleted);
-            timer = setTimeout(showAlert,500);
-        }
+            setPopup({flag: true, val: `Compleated the task:\n ${task.text}`});
+            closePopup();
     }
 
     const handleClear=()=>{
         setTasks([]);
+        setPopup({flag: true, val: `You are done for the day!`});
+        closePopup();
     }
 
   return (
-
     <div className='container row'>
         <div id= "alerts" className="alert alert-info" style={{display:'none'}}>
         <strong>One Task</strong> removed.
@@ -72,10 +73,12 @@ function ToDo() {
             !tasks.length ? null:(
                 <div>
                     <button className= "btn btn-secondary  mt-4 mb-4" onClick={()=>handleClear()}>
-                       Clear
+                       Done for the day
                     </button>
                 </div>
-      )}
+        )}
+        
+        <Messages popup={popup.flag} msg={popup.val}></Messages>
     </div>
   )
 }

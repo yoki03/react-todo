@@ -1,6 +1,11 @@
-import React from 'react'
+import React, {useState} from 'react';
+import Modals from './Modals';
+
 
 function TodoList({tasks, handleDelete}) {
+  const [modpop, setModpop] = useState(false);
+  const [currenttask, setCurrenttask] = useState({});
+
   return (
     <div>
         {
@@ -13,9 +18,16 @@ function TodoList({tasks, handleDelete}) {
 
               <button
               className ="mt-2 btn btn-warning material-icons"
-              onClick ={()=> handleDelete(task)}>
+              onClick={() => {setModpop(true); setCurrenttask(task)}}>
                 done
               </button>
+            <Modals 
+              modpop={modpop}
+              currenttask={currenttask} 
+              handleDelete={handleDelete}
+              setModpop={setModpop}
+              ></Modals>
+              
             </div>
             ))
         }

@@ -1,15 +1,13 @@
 export const getTodos = () => {
-  try {
-    let val = JSON.parse(localStorage.getItem("localTasks"));
-    return (val);
-  } catch {
+  if (localStorage.getItem("localTasks") === null){
     return ([]);
+  } else {
+  return (JSON.parse(localStorage.getItem("localTasks")));
   }
 };
 
 export const setTodos = (p) => {
   localStorage.setItem("localTasks", JSON.stringify(p));
-  console.log(typeof(p));
 };
 
 

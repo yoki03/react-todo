@@ -1,15 +1,16 @@
-import React from 'react'
+import React from 'react';
 
 function TodoForm({addTask}) {
-      
+
       const getValueInput = () =>{
         const task = document.getElementById("CurrentTask").value; 
         addTask(task);
+        document.getElementById("CurrentTask").value = '';
       }
 
-  return (
+  return (<>
     <div>
-        <form className='input-group mb-3' onSubmit={getValueInput}>
+        <div className='input-group mb-3'>
                 <input 
                 name='task' 
                 id='CurrentTask'
@@ -19,9 +20,12 @@ function TodoForm({addTask}) {
                 />
                 <button 
                 className='btn btn-primary col-3'
+                onClick={() => getValueInput()}
                 >add</button>
-        </form>
+        </div>
     </div>
+
+    </>
   )
 }
 
