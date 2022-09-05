@@ -24,11 +24,11 @@ function ToDo() {
         if (!task || /^\s*$/.test(task)) {
             return;
         }else if (tasks.find((t) => t.text === task)){
-            setPopup({flag: true, val: `task ${task} already exist`});
+            setPopup({flag: true, val: `following task already exist : ${task}`});
             closePopup();
             return;
         }
-        setPopup({flag: true, val: `added the task: ${task}`});
+        setPopup({flag: true, val: `Added the following task : ${task}`});
         closePopup();
         setTasks([...tasks, { id: new Date().getTime().toString(), text: task}]);
     }
@@ -36,7 +36,7 @@ function ToDo() {
     const handleDelete = (task)=>{
             const deleted = tasks.filter((t)=>t.id !== task.id);
             setTasks(deleted);
-            setPopup({flag: true, val: `Compleated the task:\n ${task.text}`});
+            setPopup({flag: true, val: `Completed the following task : ${task.text}`});
             closePopup();
     }
 
@@ -57,13 +57,7 @@ function ToDo() {
         
         <div className='badge text-black'>
             You have {
-                ! tasks.length 
-                ? "no tasks"
-                : tasks.length === 1
-                ? "one task"
-                : tasks.length >1 
-                ? `${tasks.length} tasks`
-                : null
+                (!tasks.length)? "no tasks": ((tasks.length === 1) ? "one task" : ((tasks.length >1) ? `${tasks.length} tasks`: null))
             }
         </div>
 

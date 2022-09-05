@@ -5,8 +5,8 @@ function Modals({modpop, setModpop, currenttask, handleDelete}) {
   return (
     <div>
         <Modal show={modpop}>
-            <Modal.Header><Modal.Title>Conformation</Modal.Title></Modal.Header>
-            <Modal.Body><p>Are you sure to delete this Task?</p><p>{currenttask.text}</p></Modal.Body>
+            <Modal.Header><Modal.Title>Confirmation</Modal.Title></Modal.Header>
+            <Modal.Body><p>Are you sure do you want to delete this task?</p><p>{currenttask.text}</p></Modal.Body>
             <Modal.Footer>
                 <button 
                   type="button" 
