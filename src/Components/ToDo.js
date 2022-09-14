@@ -21,6 +21,7 @@ function ToDo() {
 
     const addTask = (task) => {
         task = task.trim();
+        task = task.toLowerCase();
         if (!task || /^\s*$/.test(task)) {
             return;
         }else if (tasks.find((t) => t.text === task)){

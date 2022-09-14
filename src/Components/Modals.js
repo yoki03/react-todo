@@ -6,7 +6,7 @@ function Modals({modpop, setModpop, currenttask, handleDelete}) {
     <div>
         <Modal show={modpop}>
             <Modal.Header><Modal.Title>Confirmation</Modal.Title></Modal.Header>
-            <Modal.Body><p>Are you sure do you want to delete this task?</p><p>{currenttask.text}</p></Modal.Body>
+            <Modal.Body><p>Are you sure do you want to delete below task?</p><p>{currenttask.text}</p></Modal.Body>
             <Modal.Footer>
                 <button 
                   type="button" 
